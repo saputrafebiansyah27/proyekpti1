@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ganesha Sneakers - Konten</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Ganesha Sneakers</h1>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-link">Beranda</a>
+            <a href="promo.html" class="nav-link">Promo</a>
+            <a href="gallery.html" class="nav-link">Galeri</a>
+            <a href="history.html" class="nav-link">Riwayat Transaksi</a>
+            <a href="content.html" class="nav-link active">Content</a>
+            <a href="account.html" class="nav-link">Akun</a>
+            <a href="payment.html" class="nav-link">Pembayaran</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Konten</h2>
+        <div class="content-section">
+            <h3>Waktu Sekarang</h3>
+            <div id="clock" class="clock">00:00:00</div>
+        </div>
+        <div class="content-section">
+            <h3>Wishlist Anda</h3>
+            <div id="wishlist-items">
+                <p>Wishlist kosong. Tambahkan produk dari beranda!</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Load wishlist from localStorage
+        let wishlist = JSON.parse(localStorage.getItem('ganeshaWishlist')) || [];
+        const wishlistItems = document.getElementById('wishlist-items');
+
+        function updateWishlistDisplay() {
+            if (wishlist.length === 0) {
+                wishlistItems.innerHTML = '<p>Wishlist kosong. Tambahkan produk dari beranda!</p>';
+            } else {
+                wishlistItems.innerHTML = '<ul>' + wishlist.map(item => `<li>${item} <button onclick="removeFromWishlist('${item}')">Hapus</button></li>`).join('') + '</ul>';
+            }
+        }
+
+        function removeFromWishlist(product) {
+            wishlist = wishlist.filter(item => item !== product);
+            localStorage.setItem('ganeshaWishlist', JSON.stringify(wishlist));
+            updateWishlistDisplay();
+        }
+
+        updateWishlistDisplay();
+    </script>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy;2026 Saputra Febiansyah.NIM 251011700170. KELAS 01SIFP003.</p>
+            <div class="footer-links">
+                <a href="#">Tentang Kami</a>
+                <a href="#">Kontak</a>
+                <a href="#">Kebijakan Privasi</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
